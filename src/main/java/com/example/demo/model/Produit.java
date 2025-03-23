@@ -1,10 +1,9 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import orm.DynamicORM;
 
-@Entity
-@Table(name = "PRODUIT")
-public class Produit
+public class Produit extends DynamicORM<Produit>
 {
 
     @Id

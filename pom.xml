@@ -61,7 +61,12 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.7.2</version> <!-- Vérifie la dernière version -->
 		</dependency>
-
+	  <!-- ORM -->
+	  	<dependency>
+			<groupId>com.exemple</groupId>
+			<artifactId>mon-jar</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
