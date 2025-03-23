@@ -7,14 +7,9 @@ public class Produit extends DynamicORM<Produit>
 {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer Id;
-
-    @Column(nullable = false)
     String nom_produit;
-
-    @Column(nullable = false)
-    private double prix_produit;
+    double prix_produit;
 
     // Getters et Setters
     public Integer getId() { return Id; }
