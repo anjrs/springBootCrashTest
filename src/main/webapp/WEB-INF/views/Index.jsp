@@ -1,27 +1,40 @@
-<%@ page import="com.example.demo.model.*" %>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertion Produit</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Insertion Produit</h1>
+    <form method="post" action="/produits/insertion" method="POST">
+        <label for="nom_produit">Nom du produit :</label>
+        <input type="text" id="nom_produit" name="nom_produit" required>
 
-<h1>Coucou</h1>
+        <label for="prix">Prix en Euros :</label>
+        <input type="number" id="prix_produit" name="prix_produit" step="0.01" min="0" required>
 
-<table class="table custom-table">
-    <thead>
-        <tr>  
-            <th scope="col">Nom</th>
-            <th scope="col">Prix</th>
-        </tr>
-    </thead>
-    <tbody>
+        <button type="submit">Insérer le produit</button>
+    </form>
 
-        <% Produit[] produits =(Produit[])(request.getAttribute("lesProduits")) ;
-                        for (Produit produit :produits) { %>
-                        <tr scope="row">
-                            <td><%= produit.getNomProduit() %></td>
-
-                            <td><%= produit.getPrixProduit() %></td>
-                            
-                             
-                        </tr>
-                        <tr class="spacer"><td colspan="100"></td></tr>
-                      <% } %>
-                      
-                    </tbody>
-                  </table>
+     <h2 style="text-align: center;">Liste des Produits</h2>
+    <table border="1" style="width: 100%; text-align: left;">
+        <thead>
+            <tr>
+                <th>Nom du produit</th>
+                <th>Prix</th>
+                <th>ID Catégorie</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="produit" items="${lesProduits}">
+                <tr>
+                    <td>${produit.nom_produit}</td>
+                    <td>${produit.prix_produit}</td>
+                    <td>${produit.idCategorie}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</body>
+</html>

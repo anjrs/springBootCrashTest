@@ -64,12 +64,41 @@ public class Produit extends DynamicORM<Produit>
     }
 
     //insertion manuelle
-    public void insert(Connection connection , String nom_produit , Double prix_produit) throws Exception
+    public void insertProduit(Connection connection , String nom_produit , double prix_produit) throws Exception
     {
         Produit instance = new Produit();
         instance.setNomProduit(nom_produit);
         instance.setPrixProduit(prix_produit);
         instance.insert(connection , false);
+    }
+
+    public Produit getProduitById(Connection connection, Integer id) throws Exception
+    {
+        Produit instance = new Produit();
+        Produit[] lesProduits = instance.selectWhere(connection , false, "Id= '" + id + "'");
+        if (lesProduits.length > 0)
+        {
+            return lesProduits[0];
+        } 
+        else
+        {
+            return null; // ou vous pouvez lancer une exception si le produit n'est pas trouvé
+        }
+        
+    }
+
+    public Produit getByNom(Connection connection , String nom_produit) throws Exception
+    {
+        Produit instance = new Produit();
+        Produit[] lesProduits = instance.selectWhere(connection , false, "nom_produit= '" + nom_produit + "'");
+        if (lesProduits.length > 0)
+        {
+            return lesProduits[0];
+        } 
+        else
+        {
+            return null; // ou vous pouvez lancer une exception si le produit n'est pas trouvé
+        }
     }
 
     //insertion de csv
