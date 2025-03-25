@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.demo.model.Produit" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,7 +9,7 @@
 </head>
 <body>
     <h1 style="text-align: center;">Insertion Produit</h1>
-    <form method="post" action="/produits/insertion" method="POST">
+    <form method="post" action="/produits/insertion">
         <label for="nom_produit">Nom du produit :</label>
         <input type="text" id="nom_produit" name="nom_produit" required>
 
@@ -17,23 +19,30 @@
         <button type="submit">Insérer le produit</button>
     </form>
 
-     <h2 style="text-align: center;">Liste des Produits</h2>
+    <h2 style="text-align: center;">Liste des Produits</h2>
     <table border="1" style="width: 100%; text-align: left;">
         <thead>
             <tr>
                 <th>Nom du produit</th>
                 <th>Prix</th>
-                <th>ID Catégorie</th>
+                <%-- <th>ID Catégorie</th> --%>
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="produit" items="${lesProduits}">
-                <tr>
-                    <td>${produit.nom_produit}</td>
-                    <td>${produit.prix_produit}</td>
-                    <td>${produit.idCategorie}</td>
-                </tr>
-            </c:forEach>
+            <%
+                Produit[] lesProduits = (Produit[]) request.getAttribute("lesProduits");
+                if (lesProduits != null) {
+                    for (Produit produit : lesProduits) {
+            %>
+                        <tr>
+                            <td><%= produit.getNomProduit() %></td>
+                            <td><%= produit.getPrixProduit() %></td>
+                            <%-- <td><%= produit.getIdCategorie() %></td> --%>
+                        </tr>
+            <%
+                    }
+                }
+            %>
         </tbody>
     </table>
 </body>

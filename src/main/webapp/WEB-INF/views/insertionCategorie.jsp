@@ -1,19 +1,27 @@
-<!-- filepath: c:\Users\USER\Downloads\demo\demo\src\main\webapp\WEB-INF\jsp\insertionCategorie.jsp -->
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.demo.model.Categorie" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Insertion Categorie</title>
 </head>
 <body>
-    <h1>${nom_produit}</h1>
-    <form action="/categories/saveCategorie" method="post">
-        <input type="hidden" name="idCategorie" value="${idCategorie}" />
+    <h1><%= request.getAttribute("nom_produit") %></h1>
+    <form action="/categories/save" method="post">
+        <input type="hidden" name="idProduit" value="<%= request.getAttribute("idProduit") %>" />
         <label for="categorie">Choisir une catégorie:</label>
-        <select name="categorie" id="categorie">
-            <c:forEach var="categorie" items="${lesCategories}">
-                <option value="${categorie.id}">${categorie.nom}</option>
-            </c:forEach>
+        <select name="idCategorie" id="categorie">
+            <%
+                Categorie[] lesCategories = (Categorie[]) request.getAttribute("lesCategories");
+                if (lesCategories != null) {
+                    for (Categorie categorie : lesCategories) {
+            %>
+                        <option value="<%= categorie.getId() %>"><%= categorie.getNomCategorie() %></option>
+            <%
+                    }
+                }
+            %>
         </select>
         <button type="submit">Enregistrer</button>
     </form>
